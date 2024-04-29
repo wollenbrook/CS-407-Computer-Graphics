@@ -1,5 +1,5 @@
 
-<h1>Hello World App &amp; Lighting -Morse</h1>
+<h1>assignment3</h1>
 <section>
     <article class="graphics">
         <canvas
