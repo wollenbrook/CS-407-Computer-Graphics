@@ -1,7 +1,20 @@
 
 <h1>Hello World App &amp; Lighting -Morse</h1>
 <section>
-    <article class="controls">
+    <article class="graphics">
+        <canvas
+            bind:this={canvas}
+            width={width} 
+            height={height}
+        />
+    </article>
+    <article class="description">
+        <p> 2 different geometry objects in a scene, with each having a different material</p>
+        <ul>
+            <li>Using 2+ lights of different types in different locations</li>
+            <li>Using physically based lighting and rendering</li>
+            <li>Able to change lighting effects via checkbox's lighting effect</li>
+        </ul>
         <p>Enable lights</p>
         <label>
             <input type="checkbox" bind:checked={ambientLight} on:change={updateLighting} />
@@ -17,22 +30,6 @@
                 on:input={updateColor}
             />
         </div>
-        
-    </article>
-    <article class="graphics">
-        <canvas
-            bind:this={canvas}
-            width={width} 
-            height={height}
-        />
-    </article>
-    <article class="description">
-        <p>The goal of this assignment is to use the World App architecture from <a href="https://discoverthreejs.com/book/first-steps/world-app/">Discover three.js</a> book to:</p>
-        <ul>
-            <li>Wrap the three.js scene in a World class that hides its implementation</li>
-            <li>refactor the design into separate modules for the scene, camera, objects, renderer, lights, ...</li>
-            <li>and that does a little more than the last assignment, in terms of objects and specifically a lighting effect</li>
-        </ul>
     </article>
 </section>
 
@@ -46,25 +43,6 @@
     article {
         flex: 200px;
         margin: 20px;
-    }
-
-    .controls {
-        flex: 1;
-        display: inline-block;
-        margin-bottom: 20px;
-    }
-
-    .controls p {
-        border-bottom: 2px solid #8c8e94;
-    }
-
-    .controls button {
-        margin-top: 10px;
-    }
-
-    .controls label {
-        display: block;
-        margin-top: 10px;
     }
 
     .control-item {
@@ -82,18 +60,6 @@
         flex: 2 200px;
     }
 
-    button {
-        background: steelblue;
-        color: white;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 10px;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        font-size: inherit;
-        font-family: inherit;
-    } 
 </style>
 
 <script>
@@ -101,26 +67,24 @@
     import ColorPicker from 'svelte-awesome-color-picker';
     import { World } from './world/World.js';
 
-    console.log('script executing');
-
     const width = 800;
     const height = 600;
 
     let ambientLight = true;
     let pointLight = true;
-    let hex = '#6b8e23';
+    let hex = 'brown';
     let wireframe = false;
     let canvas;
     let world;
 
-    // Update our lighting based on the checkboxes
+    
     function updateLighting() {
         world.setAmbientLight(ambientLight);
         world.setPointLight(pointLight);
         world.render();
     }
 
-    // Update color of the torus
+    
     function updateColor() {
         world.setColor(hex);
         world.render();

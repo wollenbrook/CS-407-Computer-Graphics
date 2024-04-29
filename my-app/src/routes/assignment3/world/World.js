@@ -1,6 +1,4 @@
 import { createCamera } from './components/camera.js';
-import { createTorus } from './components/torus.js';
-import { createCube } from './components/cube.js';
 import { createScene } from './components/scene.js';
 import { createLights } from './components/lights.js';
 
@@ -8,14 +6,16 @@ import { createRenderer } from './systems/renderer.js';
 import { Resizer } from './systems/Resizer.js';
 
 import { AxesHelper } from 'three';
+import { createCone } from './components/cone.js';
+import { createCylinder } from './components/cylinder.js';
 
 class World {
     #camera;
     #lights;
     #scene;
     #renderer;
-    #torus;
-    #cube;
+    #cone;
+    #cylinder;
 
     constructor(canvas) {
         this.#camera = createCamera();
@@ -23,12 +23,12 @@ class World {
         this.#scene = createScene();
         this.#renderer = createRenderer(canvas);
 
-        this.#torus = createTorus();
-        this.#cube = createCube();
+        this.#cone = createCone();
+        this.#cylinder = createCylinder();
 
         const axesHelper = new AxesHelper(5);
 
-        this.#scene.add(this.#torus, this.#cube, axesHelper);
+        this.#scene.add(this.#cone, this.#cylinder, axesHelper);
         this.#lights.forEach(light => this.#scene.add(light));
 
         const resizer = new Resizer(canvas, this.#camera, this.#renderer);
@@ -61,7 +61,7 @@ class World {
 
     setColor(hexValue)
     {
-        this.#torus.material.color.set(hexValue);
+        this.#cone.material.color.set(hexValue);
     }
 }
 
