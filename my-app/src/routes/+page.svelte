@@ -30,7 +30,6 @@
 		flex: 0.6;
 		margin-top: 0px;
 	}
-
 	h1 {
 		width: 100%;
 	}
