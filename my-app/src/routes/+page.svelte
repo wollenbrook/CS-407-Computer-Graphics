@@ -1,32 +1,25 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import pipes from '$lib/images/pipes.png';
 </script>
 
 <svelte:head>
 	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<meta name="description" content="Portfolio" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+	<div class="banner">
+		<img src={pipes} alt="CS407 Graphic Demo's" />
+	</div>
 </section>
+<div class="assignments text-column">
+	<h1>Computer Graphics Demos:</h1>
+	<ul>
+		<li><a href="/assignment2">Assignment 2: Animate a simple object</a></li>
+		<li><a href="/assignment3">Assignment 3: Refactor to use the World App structure and explore physically based lighting</a></li>
+		<li><a href="/assignment4">Assignment 4: Using Transformations, the Scene Graph, and Animation</a></li>
+	</ul>
+</div>
 
 <style>
 	section {
@@ -35,25 +28,29 @@
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
+		margin-top: 0px;
 	}
 
 	h1 {
 		width: 100%;
 	}
 
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
+	.banner {
+		text-align: center;
+		border-right: 4px solid #333;
+		border-left: 4px solid #333;
+		border-radius: 10px;
+	}
+	.banner img {
+		width: 600px;
+		margin-right: -3px;
 	}
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+	.assignments {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: left;
+		flex: 0.4;
 	}
 </style>

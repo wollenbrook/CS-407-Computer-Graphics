@@ -10,7 +10,7 @@
 	--color-theme-1: #ff3e00;
 	--color-theme-2: #4075a6;
 	--color-text: rgba(0, 0, 0, 0.7);
-	--column-width: 42rem;
+	
 	--column-margin-top: 4rem;
 	font-family: var(--font-body);
 	color: var(--color-text);
@@ -87,6 +87,17 @@ button {
 button:focus:not(:focus-visible) {
 	outline: none;
 }
+
+button {
+	background: steelblue;
+	color: white;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+} 
 
 @media (min-width: 720px) {
 	h1 {
