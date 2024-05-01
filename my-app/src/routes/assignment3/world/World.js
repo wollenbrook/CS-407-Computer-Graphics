@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import { createCamera } from './components/camera.js';
 import { createScene } from './components/scene.js';
 import { createLights } from './components/lights.js';
@@ -12,6 +13,7 @@ import { createCylinder } from './components/cylinder.js';
 class World {
     #camera;
     #lights;
+    #ambientLight;
     #scene;
     #renderer;
     #cone;
@@ -30,6 +32,8 @@ class World {
 
         this.#scene.add(this.#cone, this.#cylinder, axesHelper);
         this.#lights.forEach(light => this.#scene.add(light));
+        this.#ambientLight = new THREE.AmbientLight(0x404040); 
+        this.#scene.add(this.#ambientLight);
 
         const resizer = new Resizer(canvas, this.#camera, this.#renderer);
     }
@@ -38,14 +42,11 @@ class World {
         this.#renderer.render(this.#scene, this.#camera);
     }
 
-    setAmbientLight(value)
-    {
-        // Not a great solution to do this by index TODO: set up a better way to handle this
+    setAmbientLight(value) {
         if (value) {
-            this.#lights[1].intensity = 0.5;
-        }
-        else {
-            this.#lights[1].intensity = 0;
+            this.#ambientLight.intensity = 40;
+        } else {
+            this.#ambientLight.intensity = 0;
         }
     }
 
