@@ -1,5 +1,5 @@
 
-<h1>assignment3</h1>
+<h1>Assignment #3</h1>
 <section>
     <article class="graphics">
         <canvas
