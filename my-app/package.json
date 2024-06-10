@@ -27,6 +27,8 @@
 	"dependencies": {
 		"@codemirror/lang-cpp": "^6.0.2",
 		"@codemirror/theme-one-dark": "^6.1.2",
+		"ammo.js": "^0.0.10",
+		"cannon-es": "^0.20.0",
 		"svelte-codemirror-editor": "^1.4.0",
 		"svelte-highlight": "^7.6.1"
 	}
