@@ -11,7 +11,7 @@ import { createCat } from './components/cat.js';
 import { createCrossBow } from './components/crossbow.js';
 import { createDartboard } from './components/dartboard.js';
 import { createDagger } from './components/dagger.js';
-import { c } from 'svelte-highlight/languages';
+import * as CANNON from 'cannon';
 
 let camera, renderer, scene, loop, controls;
 let directionalLight;
@@ -21,6 +21,7 @@ let rotationZ = 0;
 //Let other shapes
 let ground, crossbow;
 let keys = {};
+let world;
 
 class World {
     // 1. Create an instance of the World app
@@ -39,16 +40,56 @@ class World {
             }
         });
 
+        // Create a new world
+        world = new CANNON.World();
+        world.gravity.set(0, -9.82, 0); // Set gravity to Earth's gravity 
+
+         // Create materials
+         const daggerMaterial = new CANNON.Material('daggerMaterial');
+         const dartboardMaterial = new CANNON.Material('dartboardMaterial');
+         const groundMaterial = new CANNON.Material('groundMaterial');
+ 
+         // Define the physical properties of the interactions between different materials
+         const daggerDartboardContactMaterial = new CANNON.ContactMaterial(
+             daggerMaterial,
+             dartboardMaterial,
+             {
+                 friction: 0.0, // No friction so the dagger sticks
+                 restitution: 0.0, // No bounce
+             }
+         );
+ 
+         const daggerGroundContactMaterial = new CANNON.ContactMaterial(
+             daggerMaterial,
+             groundMaterial,
+             {
+                 friction: 0.5, // Some friction so the dagger doesn't slide
+                 restitution: 0.7, // Some bounce
+             }
+         );
+ 
+         // Add the contact materials to the world
+         world.addContactMaterial(daggerDartboardContactMaterial);
+         world.addContactMaterial(daggerGroundContactMaterial);
+
         scene = createScene();
         renderer = createRenderer(container);
         renderer.shadowMap.enabled = true; // Enable shadows in the renderer
 
-        loop = new Loop(camera, scene, renderer);
+        loop = new Loop(camera, scene, renderer, world);
 
         //Create shapes
 
         const ground = createGround();
         ground.receiveShadow = true; // Enable shadow receiving on the ground
+
+        // Create a ground body
+        const groundBody = new CANNON.Body({
+            mass: 0 // mass == 0 makes the body static
+        });
+        const groundShape = new CANNON.Plane();
+        groundBody.addShape(groundShape);
+        world.addBody(groundBody);
 
         //Create lighting
             
@@ -83,11 +124,25 @@ class World {
         dartboard1.scale.set(10, 10, 10);
         scene.add(dartboard1);
 
+        const dartboardBody1 = new CANNON.Body({
+            mass: 0,
+            shape: new CANNON.Box(new CANNON.Vec3(10, 10, 10))
+        });
+        dartboardBody1.position.copy(dartboard1.position);
+        world.addBody(dartboardBody1);
+
         // Create and position the second dartboard
         const dartboard2 = await createDartboard();
         dartboard2.position.set(100, 50, -100); // twice the distance along the positive x axis
         dartboard2.scale.set(10, 10, 10);
         scene.add(dartboard2);
+
+        const dartboardBody2 = new CANNON.Body({
+            mass: 0,
+            shape: new CANNON.Box(new CANNON.Vec3(10, 10, 10))
+        });
+        dartboardBody1.position.copy(dartboard1.position);
+        world.addBody(dartboardBody1);
 
         // Create and position the third dartboard
         const dartboard3 = await createDartboard();
@@ -95,11 +150,25 @@ class World {
         dartboard3.scale.set(10, 10, 10);
         scene.add(dartboard3);
 
+        const dartboardBody3 = new CANNON.Body({
+            mass: 0,
+            shape: new CANNON.Box(new CANNON.Vec3(10, 10, 10))
+        });
+        dartboardBody1.position.copy(dartboard1.position);
+        world.addBody(dartboardBody3);
+
         // Create and position the fourth dartboard
         const dartboard4 = await createDartboard();
         dartboard4.position.set(-200, 50, -100); // twice the distance along the positive z axis
         dartboard4.scale.set(10, 10, 10);
         scene.add(dartboard4);
+
+        const dartboardBody4 = new CANNON.Body({
+            mass: 0,
+            shape: new CANNON.Box(new CANNON.Vec3(10, 10, 10))
+        });
+        dartboardBody1.position.copy(dartboard1.position);
+        world.addBody(dartboardBody4);
 
         // Load the dagger model once
         let daggerModel = await createDagger();
@@ -109,22 +178,40 @@ class World {
             if ((event.key === 'f' || event.key === 'F') && daggerModel) { // Check if the 'F' key was pressed and the dagger model is loaded
                 const dagger = daggerModel.clone();
 
-                // Position the dagger at the crossbow's location
-                dagger.position.copy(crossbow.position);
+                    // Position the dagger at the camera's location
+                    dagger.position.copy(camera.position);
 
-                // Set the dagger's rotation to match the crossbow's rotation
-                dagger.rotation.copy(crossbow.rotation);
+                    // Offset the dagger's position to make it appear as if it's coming from the crossbow
+                    dagger.position.x -= 0; // Adjust the offset values as needed
+                    dagger.position.y += 1;
+                    dagger.position.z += 0;
+                    // Set the dagger's rotation to match the camera's rotation
+                    dagger.rotation.copy(camera.rotation);
 
-                // Scale the dagger to be one-eighth the size
-                dagger.scale.set(0.05, 0.05, 0.05);
+                    // Scale the dagger to be one-eighth the size
+                    dagger.scale.set(0.03, 0.003, 0.003);
 
-                // Add the dagger to the scene
-                scene.add(dagger);
+                    // Make the dagger invisible initially
+                    dagger.visible = false;
+
+                    // Add the dagger to the scene
+                    scene.add(dagger);
 
                 // Animate the dagger
                 const animate = () => {
-                    // Move the dagger in the direction the crossbow is facing
-                    dagger.position.add(crossbow.getWorldDirection().multiplyScalar(-1));
+                    // Create a new Vector3 for the direction
+                    let direction = new THREE.Vector3();
+
+                    // Get the world direction into the direction variable
+                    camera.getWorldDirection(direction);
+
+                    // Move the dagger in the direction the camera is facing
+                    dagger.position.add(direction.multiplyScalar(2));
+
+                    // Make the dagger visible once it has passed the crossbow
+                    if (dagger.position.z > camera.position.z + 10) {
+                        dagger.visible = true;
+                    }
 
                     // If the dagger is still within the scene, continue animating it
                     if (dagger.position.z > -1000) {
@@ -132,7 +219,7 @@ class World {
                     }
                 };
 
-                animate();
+            animate();
             }
         });
 
@@ -181,6 +268,7 @@ class World {
         });
     }
         */
+       
 }
 
     export { World};

@@ -9,17 +9,17 @@
     </article>
 
     <article class="description">
-        <p> Load a pre-build 3D model and use an animation </p>
-        <ul>
-            <li>Read the glTF file and place the object into your scene</li>
-            <li>Include some form of user interaction that makes the object run its animation, move around the scene, transform in some way</li>
-            <li>Use lighting as usual and some form of camera control</li>
-        </ul>
-        <p>Controls:</p>
-        <ul>
-            <li><strong>WASD keys:</strong> Control movement and rotation of the cat</li>
-            <li><strong>Cursor & Scroll Wheel:</strong> Control movement and rotation of the camera</li>
-        </ul>
+        <p> This project involves a 3D simulation of a dart game. It includes a pre-built 3D model of a crossbow, dagger, and a dartboard. </p>
+    <ul>
+        <li>The glTF files for the dagger and dartboard are read and the objects are placed into the scene.</li>
+        <li>User interaction triggers the dagger to move towards the dartboard, simulating the action of throwing a dart.</li>
+        <li>The scene is illuminated with directional lighting and the camera can be controlled to view the scene from different angles.</li>
+    </ul>
+    <p>Controls:</p>
+    <ul>
+        <li><strong>F Key:</strong> Shoots the dagger towards the dartboard.</li>
+        <li><strong>Cursor & Scroll Wheel:</strong> Control movement and rotation of the camera.</li>
+    </ul>
     </article>
 
 </section>
