@@ -1,9 +1,28 @@
 
-<h1>Custom Geometry with Per-Vertex Colors &amp; Camera Controls</h1>
+<h1>Assignment #5</h1>
 <section>
-    <article class="controls">
-        <p>Controls</p>
-        
+    <article class="graphics">
+        <code>{Math.round(fps)} FPS</code>
+            <canvas
+            bind:this={canvas}
+            tabindex="0"
+            on:keydown={onKeyDown}
+            width={width} 
+            height={height}
+        />
+    </article>
+    <article class="description">
+        <p>Create your own object using an indexed buffer geometry.</p>
+        <ul>
+            <li>Design and implement a simple 3D model: Tetrakis Hexahedron.</li>
+            <li>Include an animation that rotates the object over time.</li>
+            <li>Use per-vertex colors to make the object visually interesting.</li>
+            <li>Utilize appropriate lighting and camera control to enhance the visual experience.</li>
+        </ul>
+        <p>Controls:</p>
+        <ul>
+            <li><strong>Cursor & Scroll Wheel:</strong> Control movement and rotation of the camera.</li>
+        </ul>
         <button type="button" on:click={animateHandler}>
             {@html running ? 'Stop&nbsp;' : 'Start'} Animation
         </button>
@@ -20,25 +39,7 @@
             Point
         </label>
     </article>
-    <article class="graphics">
-        <code>{Math.round(fps)} FPS</code>
-            <canvas
-            bind:this={canvas}
-            tabindex="0"
-            on:keydown={onKeyDown}
-            width={width} 
-            height={height}
-        />
-    </article>
-    <article class="description">
-        <p>The goal of this assignment is to learn how geometries are organized, represented and delivered to OpenGL and the graphics card.</p>  <p>Requirements are:</p>
-        <ul>
-            <li>Construct a custom geometry object manually by specifying vertices and faces in an indexed buffer geometry.</li>
-            <li>Use per-vertex colors so we can pass custom attribute data to the vertex shader</li>
-            <li>Implement orbit and optionally camera navigation through the scene</li>
-        </ul>
-        <p>Use the mouse to orbit and pan the camera: left mouse click (hold down) or single finger swipe to orbit, right mouse click (hold down), arrow keys, or two-finger swipe to pan; zoom with the scroll wheel or pinch gesture.</p>
-    </article>
+    
 </section>
 
 <style>
@@ -51,27 +52,6 @@
     article {
         flex: 200px;
         margin: 20px;
-    }
-
-    .controls {
-        flex: 1;
-        display: inline-block;
-        margin-bottom: 20px;
-    }
-
-    .controls p {
-        border-bottom: 2px solid #8c8e94;
-        text-align: center;
-        text-transform: uppercase;
-    }
-
-    .controls button {
-        margin-top: 10px;
-    }
-
-    .controls label {
-        display: block;
-        margin-top: 10px;
     }
 
     .control-item {
@@ -89,18 +69,6 @@
         flex: 2 200px;
     }
 
-    button {
-        background: steelblue;
-        color: white;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 10px;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        font-size: inherit;
-        font-family: inherit;
-    } 
 </style>
 
 <script lang="ts">

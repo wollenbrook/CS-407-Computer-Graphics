@@ -15,6 +15,11 @@
             <li>Include some form of user interaction that makes the object run its animation, move around the scene, transform in some way</li>
             <li>Use lighting as usual and some form of camera control</li>
         </ul>
+        <p>Controls:</p>
+        <ul>
+            <li><strong>WASD keys:</strong> Control movement and rotation of the cat</li>
+            <li><strong>Cursor & Scroll Wheel:</strong> Control movement and rotation of the camera</li>
+        </ul>
     </article>
 
 </section>

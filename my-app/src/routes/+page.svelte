@@ -18,9 +18,10 @@
 		<li><a href="/assignment2">Assignment 2: Animate a simple object</a></li>
 		<li><a href="/assignment3">Assignment 3: Refactor to use the World App structure and explore physically based lighting</a></li>
 		<li><a href="/assignment4">Assignment 4: Using Transformations, the Scene Graph, and Animation</a></li>
-		<li><a href="/assignment5">Assignment 5: </a></li>
-		<li><a href="/assignment6">Assignment 6: </a></li>
-		<li><a href="/assignment6">Assignment 7: </a></li>
+		<li><a href="/assignment5">Assignment 5: Using an indexed buffer geometry, design and implement a simple model.</a></li>
+		<li><a href="/assignment6">Assignment 6: Load & Use Model Files, Including Animation</a></li>
+		<li><a href="/assignment7">Assignment 7: Vertex and Fragment Shaders</a></li>
+		<li><a href="/finalProject">Final Project: Dart Crossbow Archery?</a></li>
 	</ul>
 </div>
 

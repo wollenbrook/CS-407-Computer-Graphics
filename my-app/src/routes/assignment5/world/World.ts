@@ -1,5 +1,5 @@
 import { createCamera } from './components/camera.js';
-import { Star } from './components/Star.js';
+import { tetrakisHexahedron } from './components/tetrakisHexahedron.js';
 import { createScene } from './components/scene.js';
 import { createLights } from './components/lights.js';
 
@@ -16,7 +16,7 @@ class World {
     private lights : Light[];
     private scene : Scene;
     private renderer : WebGLRenderer;
-    private star: Star;
+    private tetrakisHexahedron: tetrakisHexahedron;
     private loop: Loop;
     private controls : Controls;
 
@@ -30,12 +30,12 @@ class World {
 
         const axesHelper = new AxesHelper(5);
 
-        this.star = new Star(8,1,3,1);
-        this.scene.add(this.star);
+        this.tetrakisHexahedron = new tetrakisHexahedron();
+        this.scene.add(this.tetrakisHexahedron);
         this.scene.add(axesHelper);
         this.lights.forEach(light => this.scene.add(light));
 
-        this.loop.addUpdateable(this.star);
+        this.loop.addUpdateable(this.tetrakisHexahedron);
         this.loop.addUpdateable(this.controls); // for the camera controls
 
         // Not currently using the resizer as our canvas has a fixed size
@@ -80,7 +80,7 @@ class World {
     }
 
     setWireframe(value: boolean) {
-        this.star.setWireframe(value);
+        this.tetrakisHexahedron.setWireframe(value);
     }
 }
 
