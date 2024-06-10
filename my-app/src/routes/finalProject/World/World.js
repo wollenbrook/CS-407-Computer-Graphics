@@ -185,6 +185,7 @@ class World {
                     dagger.position.x -= 0; // Adjust the offset values as needed
                     dagger.position.y += 1;
                     dagger.position.z += 0;
+
                     // Set the dagger's rotation to match the camera's rotation
                     dagger.rotation.copy(camera.rotation);
 
