@@ -21,7 +21,9 @@
 		<li><a href="/assignment5">Assignment 5: Using an indexed buffer geometry, design and implement a simple model.</a></li>
 		<li><a href="/assignment6">Assignment 6: Load & Use Model Files, Including Animation</a></li>
 		<li><a href="/assignment7">Assignment 7: Vertex and Fragment Shaders</a></li>
-		<li><a href="/finalProject">Final Project: Dart Crossbow Archery?</a></li>
+		<li><a href="/finalProject">Final Project: Dart Crossbow Archery? (Original Broken)</a></li>
+		<li><a href="/finalProject3">Final Project: Dart Crossbow Archery? (Dev physics: In-Progress) </a></li>
+		<li><a href="/about">About</a></li>
 	</ul>
 </div>
 

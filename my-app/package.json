@@ -27,6 +27,7 @@
 	"dependencies": {
 		"@codemirror/lang-cpp": "^6.0.2",
 		"@codemirror/theme-one-dark": "^6.1.2",
+		"@react-three/cannon": "^6.6.0",
 		"ammo.js": "^0.0.10",
 		"cannon": "^0.6.2",
 		"cannon-es": "^0.20.0",
