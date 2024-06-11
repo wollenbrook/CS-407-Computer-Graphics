@@ -7,7 +7,6 @@ import {Resizer} from './systems/Resizer.js';
 import {Loop} from './systems/Loop.js';
 import {cameraOrbit } from './systems/orbit.js';
 import { createGround } from './components/ground.js';
-import { createCat } from './components/cat.js';
 import { createCrossBow } from './components/crossbow.js';
 import { createDartboard } from './components/dartboard.js';
 import { createDagger } from './components/dagger.js';
@@ -185,7 +184,6 @@ class World {
                     dagger.position.x -= 0; // Adjust the offset values as needed
                     dagger.position.y += 1;
                     dagger.position.z += 0;
-
                     // Set the dagger's rotation to match the camera's rotation
                     dagger.rotation.copy(camera.rotation);
 
@@ -207,7 +205,7 @@ class World {
                     camera.getWorldDirection(direction);
 
                     // Move the dagger in the direction the camera is facing
-                    dagger.position.add(direction.multiplyScalar(2));
+                    dagger.position.add(direction.multiplyScalar(0.5));
 
                     // Make the dagger visible once it has passed the crossbow
                     if (dagger.position.z > camera.position.z + 10) {

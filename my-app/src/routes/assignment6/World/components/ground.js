@@ -3,7 +3,7 @@ import { PlaneGeometry, MeshPhysicalMaterial, Mesh, DoubleSide, TextureLoader } 
 function createGround() {
 
     const geometry = new PlaneGeometry(80, 2000);
-    const texture = new TextureLoader().load('/src/lib/images/grass.jpg');
+    const texture = new TextureLoader().load('grass.jpg');
     const material = new MeshPhysicalMaterial({ map: texture });
     material.side = DoubleSide;
     const ground = new Mesh(geometry, material);

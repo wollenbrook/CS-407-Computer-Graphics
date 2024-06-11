@@ -1,10 +1,9 @@
 import { Color, Scene, TextureLoader } from 'three';
-import Sky from '/src/lib/images/sunset.png';
 
 function createScene() {
   const scene = new Scene();
 
-  const skyTexture = new TextureLoader().load(Sky);
+  const skyTexture = new TextureLoader().load('sunset.png');
 
   scene.background = skyTexture;
 

@@ -3,7 +3,7 @@ import { setupModel } from './setupModel.js';
 
 async function createCat() {
     const loader = new GLTFLoader();
-    const data = await loader.loadAsync('/src/lib/models/cat/gatochan.gltf');
+    const data = await loader.loadAsync('gatochan.gltf');
   
     const cat = setupModel(data);
     cat.traverse((node) => {

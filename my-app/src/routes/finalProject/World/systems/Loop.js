@@ -39,6 +39,10 @@ class Loop {
         }
     }
 
+    getFrameRate() {
+        return 1 / this.delta;
+    }
+
     addUpdateable(object) {
         this.updatables.push(object);
     }
